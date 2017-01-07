@@ -2,20 +2,27 @@ package com.exkiwi.crawler.controller;
 
 import com.exkiwi.crawler.entity.JdItem;
 import com.exkiwi.crawler.utils.JdCrawler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.exkiwi.crawler.utils.TbCrawler;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.UnsupportedEncodingException;
 
 //@EnableAutoConfiguration
 @RestController
 public class ExkiwiController {
-    @RequestMapping("/jd/{id}")
-    public JdItem getJdItem(@PathVariable String id) throws UnsupportedEncodingException {
+    @RequestMapping(value = "jdItemDetails",method = RequestMethod.POST)
+    public JdItem getJdItem(@RequestParam(value = "url") String url) throws UnsupportedEncodingException {
         //2639008
         JdCrawler jc = new JdCrawler();
-        JdItem ji = jc.getJdItem(id);
+        JdItem ji = jc.getJdItem(url);
+        return ji;
+    }
+
+    @RequestMapping(value = "tbItemDetails",method = RequestMethod.POST)
+    public JdItem getTbItem(@RequestParam(value = "url") String url) throws UnsupportedEncodingException {
+        //2639008
+        TbCrawler tc = new TbCrawler();
+        JdItem ji = tc.getTbItem(url);
         return ji;
     }
 }
