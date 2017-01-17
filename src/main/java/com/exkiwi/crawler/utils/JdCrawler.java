@@ -30,7 +30,7 @@ public class JdCrawler {
             String avatar = doc.select("#spec-n1 > img").attr("jqimg");
             avatar=avatar.startsWith("http")?avatar:"http:"+avatar;
             //get price
-            String itemId = url.split("https://item.jd.com/")[1].split(".html")[0];
+            String itemId = url.split("item.jd.com/")[1].split(".html")[0];
             String priceUrl = priceAPI.replaceFirst("#ID#",itemId);
             HttpClientHelper hc = new HttpClientHelper(true);
             HttpResult pr = hc.get(priceUrl);
